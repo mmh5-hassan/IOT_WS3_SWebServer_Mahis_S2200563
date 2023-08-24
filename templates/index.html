@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My MicroBIT</title> 
+</head>
+<body>
+    <h1>MicroBIT Status</span></h1>
+    <h2>Current Temperature is <span id="temp">loading</span></h2>
+    <h2>Light Status: <span id="light"></span></h2>
+    <h2>Button Status: <span id="button"></span></h2>
+    <script>
+        // function to fetch and update data from the respective templates
+        function getData() {
+            fetch('/temprature').then(response => {
+                return response.text();
+            }).then(text => {
+                document.querySelector('#temp').innerHTML = text;
+            });
+            fetch('/light').then(response => {
+                return response.text();
+            }).then(text => {
+                document.querySelector('#light').innerHTML = text;
+            });
+            fetch('/button').then(response => {
+                return response.text();
+            }).then(text => {
+                document.querySelector('#button').innerHTML = text;
+            });
+        }
+
+        getData();
+
+        // Periodically fetch data every 500 milliseconds (0.5 second)
+        setInterval(getData, 500);
+
+    </script>
+</body>
+</html>
